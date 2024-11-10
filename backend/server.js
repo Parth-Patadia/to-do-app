@@ -12,10 +12,17 @@ const app = express();
 app.use(cors({
     origin: [
         'http://localhost:3000',
-        'https://to-do-app-two-sigma.vercel.app/login'
+        'https://to-do-app-two-sigma.vercel.app'
     ],
-    credentials: true
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
 }));
+
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
